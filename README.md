@@ -126,27 +126,6 @@ bash download/download_maps.sh
 bash download/download_navtrain.sh
 ```
 
-### BEV feature cache
-
-We precompute BEV features offline for stable evaluation. Download from [[link]] or generate:
-
-```bash
-export NAVSIM_EXP_ROOT="exp"
-export OPENSCENE_DATA_ROOT="/path/to/dataset"
-bash scripts/precompute_navtest_bev.sh     # navtest split (for evaluation)
-python precompute_bev_features.py          # training split
-```
-
-Expected layout after generation:
-
-```
-data/
-├── bev_cache/              # one .npz per scene token
-├── navsim_103k_bev.jsonl
-└── navsim_103k_bev_gt.jsonl
-```
-
----
 
 ## Evaluation
 
@@ -182,7 +161,7 @@ bash scripts/sft_navsim_seg_det.sh
 # Output → output/pretrain/seg_det/
 ```
 
-### Stage 2 — CVLA model fine-tuning
+### Stage 2 — VLA model fine-tuning
 
 Fine-tunes VLA model with BEV token injection and planning loss:
 
@@ -210,8 +189,8 @@ plan_k: 1
 ```
 Our code is built upon the great open-source efforts of:
 
-[WAM-Flow](https://github.com/fudan-generative-vision/WAM-Flow)
-[BEVFusion](https://github.com/mit-han-lab/bevfusion)
+-[WAM-Flow](https://github.com/fudan-generative-vision/WAM-Flow)
+-[BEVFusion](https://github.com/mit-han-lab/bevfusion)
 
 ```
 
