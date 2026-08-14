@@ -1,4 +1,4 @@
-## method Framework
+## Method Framework
 ### 1. Multi-modality Interaction
 <img src="assets/overview_interaction.png" alt="Demo">
 
@@ -21,6 +21,40 @@
 <td align="center">
 <b>Bench2Drive</b><br>
 <img src="assets/demo_bench2drive.gif" alt="GaussianFusion demo 2" width="400" height="300"/>
+</td>
+</tr>
+</table>
+
+</div>
+
+### 2. Scene Perception on nuScenes
+
+## 🖼️ Video Demo
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center">
+<b>3D Detection </b><br>
+<img src="assets/3d_detection-demo-1.gif" alt="Demo 1"/>
+</td>
+
+<td align="center">
+<b>BEV Map Segmentation</b><br>
+<img src="assets/seg-demo-1.gif" alt="Demo 2"/>
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<b>3D Detection </b><br>
+<img src="assets/assets/3d_detection-demo-2.gif" alt="Demo 3"/>
+</td>
+
+<td align="center">
+<b>BEV Map Segmentation</b><br>
+<img src="assets/seg-demo-2.gif" alt="Demo 4"/>
 </td>
 </tr>
 </table>
