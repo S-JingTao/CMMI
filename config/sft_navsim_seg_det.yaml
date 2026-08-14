@@ -1,0 +1,44 @@
+model_path: pretrained_model/fudoki
+text_embedding_path: pretrained_model/fudoki/text_embedding.pt
+pretrain_model_path: pretrained_model/cmmi
+
+stage: s2
+txt_max_length: 700
+new_embedding_path: ""
+pretrain_path: ""
+ckpt_path: "output/train/navsim_bev/checkpoint-10000/model.safetensors"
+
+bev_ckpt_path: pretrained_model/bevfusion/bevfusion_lidar_nusc.pth
+
+data_list: [
+  "data/navsim_103k_bev_gt.jsonl",
+]
+
+# ── Phase 1: only seg_head + det_head trainable ─────────────────────────
+seg_det_pretrain: true
+plan_seg_weight: 1.0
+plan_det_weight: 1.0
+
+mixed_precision: "no"
+accumulate_grad_batches: 1
+max_grad_norm: 1.0
+seed: 42
+source_distribution: "uniform"
+vocab_size: 102400
+batch_size: 1
+dataloader_num_workers: 8
+learning_rate: 1e-3
+lr_scheduler_type: "cosine"
+lr_warmup_steps: 100
+max_train_steps: 20000
+max_epochs: 100
+uncond_prob: 0
+use_quantize: true
+random_seed: false
+l2_loss_weight: 0
+train_llm_emb: false
+
+checkpointing_steps: 1000
+checkpoints_total_limit: 5
+
+plan_loss: false

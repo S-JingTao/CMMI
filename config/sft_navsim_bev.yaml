@@ -1,0 +1,49 @@
+model_path: pretrained_model/fudoki
+text_embedding_path: pretrained_model/fudoki/text_embedding.pt
+pretrain_model_path: pretrained_model/cmmi   # base model (config.json + model.safetensors)
+
+stage: s2
+txt_max_length: 700  # 500 text + 196 bev tokens
+new_embedding_path: ""
+
+pretrain_path: ""  # base model already loaded from pretrain_model_path/model.safetensors
+ckpt_path: "output/train/navsim_bev/checkpoint-10000/model.safetensors"  # continue from BEV fine-tuned checkpoint
+train_llm_emb: false
+
+# BEV encoder (LiDAR-only BEVFusion, backbone frozen, projector trainable)
+bev_ckpt_path: pretrained_model/bevfusion/bevfusion_lidar_nusc.pth
+
+data_list: [
+  "data/navsim_103k_bev_gt.jsonl",
+]
+
+mixed_precision: "no"
+accumulate_grad_batches: 2
+max_grad_norm: 1.0
+seed: 42
+source_distribution: "uniform"
+vocab_size: 102400
+batch_size: 1
+dataloader_num_workers: 8
+learning_rate: 5e-6
+lr_scheduler_type: "cosine"
+lr_warmup_steps: 100
+max_train_steps: 10000
+max_epochs: 100
+uncond_prob: 0
+use_quantize: true
+random_seed: false
+l2_loss_weight: 0
+
+checkpointing_steps: 1000
+checkpoints_total_limit: 10
+
+# ── L_plan loss (Section 3.2) ──────────────────────────────────────────
+plan_loss: true
+plan_k: 2
+plan_div_weight: 0.001
+plan_mono_weight: 0.1
+
+# ── Phase 2: load pretrained seg/det and freeze (Phase 1 output) ───────
+# After Phase 1 finishes, set this to the checkpoint safetensors path:
+seg_det_ckpt_path: "output/pretrain/seg_det/checkpoint-20000/model.safetensors"

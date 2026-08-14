@@ -1,0 +1,19 @@
+_target_: navsim.agents.cmmi_bev_agent.CMMIBevAgent
+_convert_: 'all'
+
+trajectory_sampling:
+  _target_: nuplan.planning.simulation.trajectory.trajectory_sampling.TrajectorySampling
+  _convert_: 'all'
+  time_horizon: 4
+  interval_length: 0.5
+
+fudoki_path: "pretrained_model/fudoki"
+cmmi_path: "pretrained_model/cmmi"
+bev_ckpt_path: "pretrained_model/bevfusion/bevfusion_lidar_nusc.pth"
+text_embedding_path: "pretrained_model/fudoki/text_embedding.pt"
+image_embedding_path: "pretrained_model/fudoki/image_embedding.pt"
+heading_mlp_path: "pretrained_model/cmmi/best_model_epoch95.pt"
+
+discrete_fm_steps: 5
+seed: 99
+dtype: default

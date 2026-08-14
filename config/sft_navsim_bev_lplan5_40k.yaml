@@ -1,0 +1,57 @@
+model_path: pretrained_model/fudoki
+text_embedding_path: pretrained_model/fudoki/text_embedding.pt
+pretrain_model_path: pretrained_model/cmmi
+
+stage: s2
+txt_max_length: 700
+new_embedding_path: ""
+
+pretrain_path: ""
+ckpt_path: ""            # start from official pretrained baseline
+train_llm_emb: false
+
+bev_ckpt_path: pretrained_model/bevfusion/bevfusion_lidar_nusc.pth
+
+data_list: [
+  "data/navsim_103k_bev.jsonl",
+]
+
+mixed_precision: "no"    # bf16 is incompatible with spconv — do not change
+accumulate_grad_batches: 2
+batch_size: 1
+dataloader_num_workers: 8
+max_grad_norm: 1.0
+seed: 42
+source_distribution: "uniform"
+vocab_size: 102400
+learning_rate: 5e-6
+lr_scheduler_type: "cosine"
+lr_warmup_steps: 200
+max_train_steps: 40000
+max_epochs: 500
+uncond_prob: 0
+use_quantize: true
+random_seed: false
+l2_loss_weight: 0
+
+checkpointing_steps: 2000
+checkpoints_total_limit: 22
+
+# ── L_plan: plain CE loss (K=1, no diversity/monotonicity terms) ──────────────
+plan_loss: true
+plan_k: 1
+plan_div_weight: 0.0
+plan_mono_weight: 0.0
+
+# ── BEV tokens are NOT injected into LLM during training ─────────────────────
+use_bev_tokens: false
+
+# ── Γ_risk / Γ_smooth weights (inference only, used via precomputed BEV cache) ─
+plan_gamma_risk_weight: 0.1
+plan_gamma_smooth_weight: 0.01
+
+# Phase-1 pretrained seg/det heads (run Stage 1 first to generate this)
+seg_det_ckpt_path: "output/pretrain/seg_det/checkpoint-20000/model.safetensors"
+
+# Precomputed BEV feature cache (from precompute_bev_features.py)
+bev_cache_dir: "data/bev_cache"
