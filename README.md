@@ -208,7 +208,11 @@ plan_k: 1
 ## Acknowledgments
 
 ```
-Our code was modified based on a refactoring of WAM-Flow and BEVFusion.
+Our code is built upon the great open-source efforts of:
+
+[WAM-Flow](https://github.com/fudan-generative-vision/WAM-Flow)
+[BEVFusion](https://github.com/mit-han-lab/bevfusion)
+
 ```
 
 
