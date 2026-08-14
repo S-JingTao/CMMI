@@ -1,3 +1,9 @@
+## method
+### 1. Multi-modality Interaction
+<img src="assets/overview_interaction.png" alt="Demo">
+
+### 2. Multi-Tarjectory Planning and Optimization
+<img src="assets/overview_plan.png" alt="Demo">
 ## Installation
 
 ### 1. Create environment
