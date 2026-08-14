@@ -1,9 +1,33 @@
-## method
+## method Framework
 ### 1. Multi-modality Interaction
 <img src="assets/overview_interaction.png" alt="Demo">
 
 ### 2. Multi-Tarjectory Planning and Optimization
 <img src="assets/overview_plan.png" alt="Demo">
+
+## Video Demo
+
+### 1. Motion Planning on NAVSIM and Bench2Drive
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center">
+<b>Demo 1</b><br>
+<img src="assets/demo_navsim.gif" alt="GaussianFusion demo 1" width="400" height="300"/>
+</td>
+
+<td align="center">
+<b>Demo 2</b><br>
+<img src="assets/demo_bench2drive.gif" alt="GaussianFusion demo 2" width="400" height="300"/>
+</td>
+</tr>
+</table>
+
+</div>
+
+
 ## Installation
 
 ### 1. Create environment
