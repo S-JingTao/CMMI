@@ -15,12 +15,14 @@
 <tr>
 <td align="center">
 <b>NAVSIM</b><br>
-<img src="assets/demo_navsim.gif" alt="GaussianFusion demo 1" width="400" height="400"/>
+<img src="assets/demo_navsim.gif" alt="NAVSIM demo"/>
 </td>
+</tr>
 
+<tr>
 <td align="center">
 <b>Bench2Drive</b><br>
-<img src="assets/demo_bench2drive.gif" alt="GaussianFusion demo 2" width="400" height="300"/>
+<img src="assets/demo_bench2drive.gif" alt="Bench2Drive demo"/>
 </td>
 </tr>
 </table>
