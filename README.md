@@ -29,8 +29,6 @@
 
 ### 2. Scene Perception on nuScenes
 
-## 🖼️ Video Demo
-
 <div align="center">
 
 <table>
@@ -49,7 +47,7 @@
 <tr>
 <td align="center">
 <b>3D Detection </b><br>
-<img src="assets/assets/3d_detection-demo-2.gif" alt="Demo 3"/>
+<img src="assets/3d_detection-demo-2.gif" alt="Demo 3"/>
 </td>
 
 <td align="center">
