@@ -41,54 +41,6 @@ pip install -e .
 pip install -e nuplan-devkit/
 ```
 
----
-
-## Model Weights
-
-### Base models
-
-Download and place under `pretrained_model/`:
-
-```
-pretrained_model/
-├── fudoki/                        # Janus tokenizer + image encoder
-│   ├── config.json
-│   ├── model.safetensors
-│   ├── text_embedding.pt
-│   ├── image_embedding.pt
-│   └── ...
-├── cmmi/                           # base LLM + heading MLP
-│   ├── model.safetensors
-│   ├── best_model_epoch95.pt
-│   └── ...
-└── bevfusion/
-    └── bevfusion_lidar_nusc.pth
-```
-
-| Weight | Download |
-|--------|----------|
-| `fudoki/` | [[link]] |
-| `cmmi/` | [[link]] |
-| `bevfusion_lidar_nusc.pth` | [BEVFusion release](https://github.com/mit-han-lab/bevfusion) |
-
-### Our checkpoints
-
-Download from [[Google Drive / HuggingFace link]] and place as:
-
-```
-output/
-├── pretrain/
-│   └── seg_det/
-│       └── checkpoint-20000/        # Phase-1 perception pretraining
-│           └── model.safetensors
-└── train/
-    └── navsim_bev_lplan5_40k/
-        └── checkpoint-40000/        # Main model
-            └── model.safetensors
-```
-
----
-
 ## Data Preparation
 
 ### NavSim dataset
@@ -134,7 +86,7 @@ data/
 
 ## Evaluation
 
-Runs on 8 GPUs. Results are written to `exp/<name>/<timestamp>.csv`.
+Results are written to `exp/<name>/<timestamp>.csv`.
 
 ```bash
 cd /path/to/wamflow+
@@ -155,9 +107,9 @@ bash scripts/evaluation/run_cmmi_bev_hybrid_eval.sh
 
 ## Training
 
-### Stage 1 — Perception pretraining
+### Stage 1 — Scene Perception pretraining
 
-Trains BEV segmentation and detection heads with ground-truth supervision (~30 min on 8×A100):
+Trains BEV segmentation and 3D detection heads with ground-truth supervision:
 
 ```bash
 export NCCL_P2P_DISABLE=1
@@ -166,9 +118,9 @@ bash scripts/sft_navsim_seg_det.sh
 # Output → output/pretrain/seg_det/
 ```
 
-### Stage 2 — LLM fine-tuning
+### Stage 2 — CVLA model fine-tuning
 
-Fine-tunes the language model with BEV token injection and planning loss (~56 h on 8×A100):
+Fine-tunes VLA model with BEV token injection and planning loss:
 
 ```bash
 bash scripts/sft_navsim_bev_lplan5_40k.sh
@@ -189,37 +141,11 @@ plan_k: 1
 
 ---
 
-## Code Structure
+## Acknowledgments
 
 ```
-navsim/agents/
-└── cmmi_bev_hybrid_agent.py    # Our agent
-
-fudoki/janus/models/
-├── bev_encoder.py                  # BEVFusionEncoder, BEVProjector, seg/det heads
-├── modeling_vlm.py                 # BEV token injection into LLM
-└── processing_vlm.py               # <bev_placeholder> token
-
-scripts/evaluation/
-└── run_cmmi_bev_hybrid_eval.sh
-
-train.py
-precompute_bev_features.py
+Our code was modified based on a refactoring of WAM-Flow and BEVFusion.
 ```
 
----
-
-## Citation
-
-If you find this work useful, please cite:
-
-```bibtex
-@inproceedings{xxx2025xxx,
-  title     = {[Paper Title]},
-  author    = {[Authors]},
-  booktitle = {[Venue]},
-  year      = {2025}
-}
-```
 
 
