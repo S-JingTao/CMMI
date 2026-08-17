@@ -132,7 +132,7 @@ bash download/download_navtrain.sh
 Results are written to `exp/<name>/<timestamp>.csv`.
 
 ```bash
-cd /path/to/wamflow+
+cd /path/to/CMMI
 conda activate cmmi
 export METRIC_CACHE_PATH="/path/to/metric_cache"
 
@@ -150,7 +150,7 @@ bash scripts/evaluation/run_cmmi_bev_hybrid_eval.sh
 
 ## Training
 
-### Stage 1 — Scene Perception pretraining
+### Stage 1 — Multi-modality interaction pretraining
 
 Trains BEV segmentation and 3D detection heads with ground-truth supervision:
 
@@ -162,6 +162,8 @@ bash scripts/sft_navsim_seg_det.sh
 ```
 
 ### Stage 2 — VLA model fine-tuning
+
+Trains multi-trajectory planning and optimization.
 
 Fine-tunes VLA model with BEV token injection and planning loss:
 
@@ -190,6 +192,7 @@ plan_k: 1
 Our code is built upon the great open-source efforts of:
 
 -[WAM-Flow](https://github.com/fudan-generative-vision/WAM-Flow)
+
 -[BEVFusion](https://github.com/mit-han-lab/bevfusion)
 
 
